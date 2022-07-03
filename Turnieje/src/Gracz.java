@@ -1,10 +1,10 @@
 public class Gracz {
     private final String imie;
     private final String nazwisko;
-    private int overallScore;
-    private int score;
-    public Turniej[] trn = new Turniej[12];
-
+    private Integer[] miejsca = new Integer[12];
+    private Turniej[] tur = new Turniej[12];
+    private int punktyZturnieju;
+    private int allScore;
 
     public Gracz(String imie, String nazwisko) {
         this.imie = imie;
@@ -13,27 +13,52 @@ public class Gracz {
     public String getGracz(){
         return imie + " " + nazwisko;
     }
-    public void getAllPozycje(){
-        System.out.println(this.getGracz());
-        for (int i = 0; i < trn.length; i++) {
-            System.out.println(trn[i].getNazwa() + " Miejsce: "+trn[i].getMiejsce());
+    public Integer getMiejsce(int zKtoregoTurnieju) {
+        return miejsca[zKtoregoTurnieju];
+    }
+    public int[] getAllMiejsca(){
+        int[] tmp = new int[12];
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = miejsca[i];
+        }
+        return tmp;
+    }
+
+    public void setMiejsca(int ktoryTurniej,Integer ktoreMiejsce) {
+        miejsca[ktoryTurniej] = ktoreMiejsce;
+    }
+
+    public void setTur(Turniej[] tur) {
+        this.tur = tur;
+    }
+
+    public int ilePunktowZTurnieju(int ktoryTurniej){
+
+        int tmp = miejsca[ktoryTurniej];
+
+        switch (tmp) {
+            case 1 -> punktyZturnieju = 100;
+            case 2 -> punktyZturnieju = 80;
+            case 3 -> punktyZturnieju = 60;
+            case 4 -> punktyZturnieju = 40;
+            case 5 -> punktyZturnieju = 20;
+            default -> punktyZturnieju = 0;
+        }
+
+        return punktyZturnieju;
+    }
+
+    public void jakieMiejsceWjakimTurnieju(){
+        for (int i = 0; i < tur.length; i++) {
+            System.out.println(tur[i].getNazwa() + " Miejsce " + miejsca[i]);
         }
     }
-    public void getIlePunktowNaDanycmTurnieju(){
-        System.out.println(this.getGracz());
-        for (int i = 0; i < trn.length; i++) {
-            System.out.println(trn[i].getNazwa() + " Punkty: "+trn[i].getPunkty());
+
+    public int sumaPunktow(){
+        for (int i = 0; i < tur.length; i++) {
+            allScore += ilePunktowZTurnieju(i);
         }
-    }
-    public void getFullScore(){
-        for (int i = 0; i < trn.length; i++) {
-            this.overallScore += trn[i].getPunkty();
-        }
-        System.out.println(this.getGracz() + ", Punkty: " + overallScore);
-    }
-    public int getScoreFrom1Tour(int numerTurnieju){
-        this.score = trn[numerTurnieju].getPunkty();
-        return score;
+        return allScore;
     }
 
 }
