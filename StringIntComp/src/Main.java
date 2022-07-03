@@ -1,29 +1,40 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
-        String[] listaImion = {"Asia","Tomek","Dariusz","Jan","Michal"};
-        int[] listaLiczb = {3,4,6,1,9};
+        List<String> listaIm = new ArrayList<>();
+        listaIm.add("Asia");
+        listaIm.add("Tomek");
+        listaIm.add("Dariusz");
+        listaIm.add("Jan");
+        listaIm.add("Michał");
 
-        zwrocImiona(listaImion,listaLiczb);
+        List<Integer> listLi = new ArrayList<>();
+        listLi.add(3);
+        listLi.add(4);
+        listLi.add(6);
+        listLi.add(1);
+        listLi.add(9);
+
+        System.out.println(zwrocImiona(listaIm,listLi));
 
     }
 
-     static void zwrocImiona(String[] imiona, int[] liczby){
-        boolean praca = true;
-        int miejsceImion = 0;
+     static List<String> zwrocImiona(List<String> listaStringow, List<Integer> listaIntow){
 
-        while (praca){
-            for (int j : liczby) {
-                if (imiona[miejsceImion].length() == j) {
-                    System.out.println(imiona[miejsceImion]);
-                }
-            }
-            miejsceImion++;
-            if (miejsceImion == 5){
-                praca = false;
-            }
-        }
+        List<String> listaDoZwrocenia = new ArrayList<>();
 
+         for (String tmp : listaStringow) {
+             for (Integer integer : listaIntow) {
+                 if (tmp.length() == integer) {
+                     listaDoZwrocenia.add(tmp);
+                 }
+             }
+         }
+
+        return listaDoZwrocenia;
     }
 
 }
